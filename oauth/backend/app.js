@@ -1,6 +1,6 @@
 const express = require('express');
 const axios = require('axios');
-
+require('dotenv').config();
 const app = express();
 
 app.get('/', (req, res) => {
@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
 
 app.get('/oth', (req, res) => {
   res.redirect(
-    'https://github.com/login/oauth/authorize?client_id=fc3a64e7e9f04b0db748&redirect_uri=http://localhost:3000/callback',
+    `https://github.com/login/oauth/authorize?client_id=${process.env.CLIENT_ID_GITHUB}&redirect_uri=${process.env.CALLBACK_GITHUB}`,
   );
 });
 
@@ -25,8 +25,8 @@ app.get('/callback', async (req, res) => {
   const data = await axios.post(
     'https://github.com/login/oauth/access_token',
     {
-      client_id: 'fc3a64e7e9f04b0db748',
-      client_secret: 'f1a1d7df1ffa75407db4e674687bb07d69f10ca6',
+      client_id: `${process.env.CLIENT_ID_GITHUB}`,
+      client_secret: `${process.env.CLIENT_SECRET_GITHUB}`,
       code: `${req.query.code}`,
     },
     axiosConfig,
