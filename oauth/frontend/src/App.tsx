@@ -6,8 +6,7 @@ function App() {
   // f1a1d7df1ffa75407db4e674687bb07d69f10ca6
 
   const login = () => {
-    window.location.href =
-      'https://github.com/login/oauth/authorize?client_id=fc3a64e7e9f04b0db748&redirect_uri=http://localhost:3000';
+    window.location.href = 'http://localhost:3000/oth';
   };
 
   return (
